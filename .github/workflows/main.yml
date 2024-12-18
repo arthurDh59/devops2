@@ -19,13 +19,13 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 22.12.0
+          node-version: '22.12.0'
 
       - name: Install Dependencies
         run: npm install
 
       - name: ESLint(JS/TS) Action
-        run: npx eslint "*.js"
+        run: npx eslint "**/*.js"
 
       - name: Tests
         run: npm test
