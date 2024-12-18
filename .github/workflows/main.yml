@@ -4,32 +4,28 @@ on:
   push:
     branches:
       - main
-pull_request:
-  branches:
-  - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      
-uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      
-name: Install Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 22
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
 
-      
-name: Install Dependencies
-      run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-      
-name: ESLint(JS/TS) Action
-      uses: iCrawl/action-eslint@v1
+      - name: ESLint(JS/TS) Action
+        uses: iCrawl/action-eslint@v1
 
-      
-name: Tests
-      run: npm test
+      - name: Tests
+        run: npm test
