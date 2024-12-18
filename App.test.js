@@ -4,11 +4,11 @@ const app = require('./server');
 let server;
 
 beforeAll(() => {
-    server = app.listen(0); // Automatically allocate a free port
+    server = app.listen(0); 
 });
 
 afterAll(() => {
-    server.close(); // Ensure the server is closed after tests
+    server.close(); 
 });
 
 describe("TODOLIST API TESTS", () => {
@@ -28,8 +28,13 @@ describe("TODOLIST API TESTS", () => {
 
     it('Devrait supprimer', async () => {
         // await request(app).post('/add-task').send({ task: { id: 1, text: 'Tâche à supprimer' } });
-        const response = await request(app).delete('/?id=0');
+        const response = await request(app).delete('/').query({id:0});
         expect(response.statusCode).toBe(200);
         expect(response.body.tasks).toEqual([]);
+    });
+
+    it('Devrait renvoyer une 400 en cas de suppression d\'id inconnu',async () => {
+        const response = await request(app).delete('/').query({id:5});
+        expect(response.statusCode).toBe(400);
     });
 });
